@@ -11,6 +11,7 @@ namespace Gladiator.Model.Gladiators
 
         public Assassin(string name, int hpBase, int spBase, int dexBase, int lvl) : base(name, hpBase, spBase, dexBase, lvl)
         {
+            HpCurrent = HpMax;
         }
     }
 }

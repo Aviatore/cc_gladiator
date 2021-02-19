@@ -25,6 +25,9 @@ namespace Gladiator.Controller
 
             while (loop)
             {
+                attacker = attacker.Equals(gladiator1) ? gladiator2 : gladiator1;
+                defender = defender.Equals(gladiator1) ? gladiator2 : gladiator1;
+                
                 int hitChance = Math.Clamp((int) (attacker.DexMax - defender.DexMax), 10, 100);
 
                 if (Extentions.Random.Next(1, 101) <= hitChance)
@@ -32,16 +35,19 @@ namespace Gladiator.Controller
                     double damage = attacker.SpMax * (Extentions.Random.Next(1, 6) / 10f);
 
                     defender.DecreaseHpBy(damage);
+                    //Console.WriteLine($"{attacker.FullName}[{attacker.GetHashCode()}] deals {damage:0.0} damage");
 
                     if (defender.IsDead)
                     {
                         loop = false;
                         attacker.LevelUp();
+                        Console.WriteLine($"{defender.FullName}[{defender.GetHashCode()}] died, {attacker.FullName}[{attacker.GetHashCode()}] wins!");
                     }
                 }
-
-                attacker = attacker.Equals(gladiator1) ? gladiator2 : gladiator1;
-                defender = defender.Equals(gladiator1) ? gladiator2 : gladiator1;
+                else
+                {
+                    //Console.WriteLine($"{attacker.FullName}[{attacker.GetHashCode()}] missed!");
+                }
             }
             
             return attacker;

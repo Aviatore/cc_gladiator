@@ -27,7 +27,13 @@
         public void LevelUp()
         {
             Level++;
+            HealUp();
         }
+
+        public double GetHpMult() => HpMult;
+        public double GetLevel() => Level;
+        public double GetHpBase() => HpBase;
+        public double GetHpMax() => HpMax;
 
         public BaseGladiator(string name, int hpBase, int spBase, int dexBase, int lvl)
         {

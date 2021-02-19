@@ -16,7 +16,8 @@ namespace Gladiator.Controller
         
         public void GenerateGladiators(int gladiatorCount)
         {
-            if ((gladiatorCount / (gladiatorCount / 2)) % 2 == 1)
+            var div = (gladiatorCount / 2.0f);
+            if (div % 2 != 0 || (gladiatorCount / (div)) % 2 != 0)
             {
                 throw new ArgumentException("Wrong number of contestants");
             }
@@ -24,7 +25,7 @@ namespace Gladiator.Controller
             for (int i = 0; i < gladiatorCount; i++)
             {
                 BaseGladiator gladiator = GladiatorFactory.GenerateRandomGladiator();
-                // Console.WriteLine($"G {gladiator.FullName} {gladiator.GetHashCode().ToString()}");
+                Console.WriteLine($"G {gladiator.FullName}[{gladiator.GetHashCode().ToString()}] hp: {gladiator.GetHpBase()} {gladiator.GetLevel()} {gladiator.GetHpMult()} {gladiator.GetHpMax()} {gladiator.HpCurrent}");
                 _gladiators.Add(gladiator);
             }
         }
