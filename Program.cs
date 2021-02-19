@@ -12,8 +12,8 @@ namespace Gladiator
         {
             // Start the program here
             Colosseum colosseum = new Colosseum();
-            colosseum.GenerateGladiators(4);
-            BaseGladiator winner = colosseum.SimulateCombat(colosseum.SplitGladiatorsIntoPairs());
+            colosseum.GenerateGladiators(8);
+            BaseGladiator winner = colosseum.SimulateCombat(colosseum.SplitGladiatorsIntoPairs(), 0);
             Console.WriteLine($"Winner: {winner.FullName}");
         }
     }

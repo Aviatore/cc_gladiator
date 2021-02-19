@@ -23,7 +23,9 @@ namespace Gladiator.Controller
 
             for (int i = 0; i < gladiatorCount; i++)
             {
-                _gladiators.Add(GladiatorFactory.GenerateRandomGladiator());
+                BaseGladiator gladiator = GladiatorFactory.GenerateRandomGladiator();
+                // Console.WriteLine($"G {gladiator.FullName} {gladiator.GetHashCode().ToString()}");
+                _gladiators.Add(gladiator);
             }
         }
 
@@ -33,34 +35,18 @@ namespace Gladiator.Controller
             return _tournament;
         }
 
-        public BaseGladiator SimulateCombat(Tournament tournament)
+        public BaseGladiator SimulateCombat(Tournament tournament, int lvl)
         {
-            if (tournament.LeftNode != null && tournament.LeftNode.Value == null)
+            if (tournament.LeftNode.Value == null)
             {
-                return Combat.Simulate(SimulateCombat(tournament.LeftNode), SimulateCombat(tournament.RightNode));
+                BaseGladiator gladiator1 = SimulateCombat(tournament.LeftNode, lvl + 1);
+                BaseGladiator gladiator2 = SimulateCombat(tournament.RightNode, lvl + 1);
+                Console.WriteLine($"ALvl {lvl.ToString()} {gladiator1.GetHashCode()} vs. {gladiator2.GetHashCode()}");
+                return Combat.Simulate(gladiator1, gladiator2);
             }
             
-            if (tournament.LeftNode?.Value != null)
-            {
-                return Combat.Simulate(tournament.LeftNode.Value, tournament.RightNode.Value);
-            }
-            
-            return Combat.Simulate(tournament.Value, null);
-        }
-        
-        public BaseGladiator _SimulateCombat(Tournament tournament)
-        {
-            if (tournament.LeftNode != null && tournament.LeftNode.Value == null)
-            {
-                return Combat.Simulate(SimulateCombat(tournament.LeftNode), SimulateCombat(tournament.RightNode));
-            }
-            
-            if (tournament.LeftNode?.Value != null)
-            {
-                return Combat.Simulate(tournament.LeftNode.Value, tournament.RightNode.Value);
-            }
-            
-            return Combat.Simulate(tournament.Value, null);
+            Console.WriteLine($"BLvl {lvl.ToString()} {tournament.LeftNode.Value.GetHashCode()} vs. {tournament.RightNode.Value.GetHashCode()}");
+            return Combat.Simulate(tournament.LeftNode.Value, tournament.RightNode.Value);
         }
     }
 }

@@ -22,17 +22,16 @@ namespace Gladiator.Controller
                 if (LeftNode == null)
                 {
                     Value = gladiator;
+                    // Console.WriteLine($"T {gladiator.FullName} {gladiator.GetHashCode().ToString()}");
                 }
                 else
                 {
                     if (_left)
                     {
-                        LeftNode = new Tournament();
                         LeftNode.Add(gladiator);
                     }
                     else
                     {
-                        RightNode = new Tournament();
                         RightNode.Add(gladiator);
                     }
 

@@ -5,7 +5,7 @@ namespace Gladiator.Utils
 {
     public static class Extentions
     {
-        public static Random Random = new Random();
+        public static Random Random = new Random(1);
         public static double Value(this StatisticMultiplier statisticMultiplier)
         {
             return statisticMultiplier switch
